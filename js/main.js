@@ -39,37 +39,60 @@ calc.innerHTML
 `<div class="key color">&lt;=</div>`
 `<div class="key color">+</div>`
 `<div class="key color height-2">=</div>`
-
-
-
 */
 
-// const equationDOM = document.querySelector('.equation');
-// const buttonsDOM = document.querySelectorAll('.key');
 
-// for (const buttonDOM of buttonsDOM) {    // button of buttons ...!
-//     buttonDOM.addEventListener('click', () => {
-//         const buttonValue = buttonDOM.innerText;
-//         const currentEquationValue = equationDOM.innerText;
-//         let updateEquationValue = currentEquationValue;
 
-//         switch (buttonValue) {
-//             case 'C':
-//                 updateEquationValue = '';
-//                 break;
 
-//             case '<=':
-//                 updateEquationValue = currentEquationValue.slice(0, -1);
-//                 break;
+const equationDOM = document.querySelector('.equation');
+const buttonsDOM = document.querySelectorAll('.key');
 
-//             default:
-//                 updateEquationValue += buttonValue;
-//                 break;
-//         }
+for (const buttonDOM of buttonsDOM) {    // button of buttons ...!
+    buttonDOM.addEventListener('click', () => {
+        const buttonValue = buttonDOM.innerText;
+        const currentEquationValue = equationDOM.innerText;
+        let updateEquationValue = currentEquationValue;
 
-//         equationDOM.innerText = updateEquationValue;
-//     });
-// }
+        switch (buttonValue) {
+            case 'C':
+                updateEquationValue = '';
+                break;
+
+            case '<=':
+                updateEquationValue = currentEquationValue.slice(0, -1);
+                break;
+            case '=':
+                break;  // kol kas nieko nedarome! Algoritmai..
+            case '.':
+                if (currentEquationValue.includes('.')) {
+                    break;
+                } else {
+                    updateEquationValue += buttonValue; 
+                }
+            case '+':
+            case '-':
+            case '*':
+            case '%':
+            case '/':
+                if (updateEquationValue === buttonValue ||
+                    updateEquationValue === '+' ||
+                    updateEquationValue === '-' ||
+                    updateEquationValue === '*' ||
+                    updateEquationValue === '%' ||
+                    updateEquationValue === '/'
+                    ) {
+                        break;
+                    } else {
+                        updateEquationValue += buttonValue; 
+                    }
+            default:
+                updateEquationValue += buttonValue;
+                break;
+        }
+
+        equationDOM.innerText = updateEquationValue;
+    });
+}
 
 /*
 const equationDOM = document.querySelector('.equation');
